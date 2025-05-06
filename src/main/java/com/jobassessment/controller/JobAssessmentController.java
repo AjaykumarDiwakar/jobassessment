@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,4 +56,14 @@ public class JobAssessmentController {
 		return ResponseEntity.status(HttpStatus.OK).body(jobService.deleteResponse(responseId));
 	}
 	
+	@PostMapping("/addQuestion")
+	public ResponseEntity<QuestionOptionDTO> addQuestion(@RequestBody QuestionOptionDTO dto){
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(questionService.addQuestionOption(dto));
+	}
+	
+	@DeleteMapping("/deleteQuestion/{question_id}")
+	public ResponseEntity<String> deleteQuestion(@PathVariable("question_id") int questionId){
+		return ResponseEntity.status(HttpStatus.OK).body(questionService.deleteQuestion(questionId));
+	}
 }
